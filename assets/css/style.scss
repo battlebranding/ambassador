@@ -205,10 +205,24 @@ header {
 		color: #fff;
 		font-size: 30px;
 		font-weight: 300;
+		z-index: 10;
 	}
 
-	p {
-		color: inherit;
+	.overlay,
+	.background {
+		position: absolute;
+		width: 100%;
+		display: block;
+		background-color: #000;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		background-position: center;
+	}
+
+	.overlay {
+		z-index: 5;
+		opacity: .5;
 	}
 
 }

@@ -13,12 +13,13 @@
 				<?php do_action( 'after_show_brand_header' ); ?>
 
 				<?php if ( get_brand_option('brand_position') ): ?>
-				<div class="billboard" style="background-image: url(<?php echo get_brand_option( 'brand_position_background' ); ?>); color: <?php echo get_brand_option('billboard_font_color'); ?>;">
+				<div class="billboard">
 					<div class="content">
 						<?php show_brand_position(); ?>
 						<a class="button medium" href="<?php echo home_url('about'); ?>">Learn More</a>
 					</div>
 					<div class="overlay"></div>
+					<div class="background" style="background-image: url(<?php echo get_brand_option( 'brand_position_background' ); ?>);"></div>
 				</div>
 				<?php endif; ?>
 
