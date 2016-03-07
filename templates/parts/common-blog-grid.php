@@ -1,3 +1,4 @@
+<?php if ( have_posts() ): ?>
 <div class="blog-grid">
 	<?php while ( have_posts() ) : the_post(); ?>
 		<div class="post-wrapper width-percent-25">
@@ -12,3 +13,4 @@
 		</div>
 	<?php endwhile; ?>
 </div>
+<?php endif; ?>
