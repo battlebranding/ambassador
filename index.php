@@ -22,7 +22,7 @@
 									<h2><?php the_title(); ?></h2>
 									<p class="post-published">Posted <span class="post-date"><?php echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?></span> at <span class="post-time"><?php echo the_date( ); echo date( 'gA', strtotime( $post->post_date ) ); ?></span></p>
 									<!-- <div class="featured-image image-wrapper wide"></div> -->
-									<?php echo $post->post_content; ?>
+									<?php echo wpautop( $post->post_content ); ?>
 								</div>
 							</div>
 						</article>
