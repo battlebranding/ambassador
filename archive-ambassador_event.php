@@ -20,8 +20,8 @@
 								<div class="post event event-single calendar-item">
 									<div class="calendar-entry">
 										<span class="day-of-week-label"><?php brand_show_event_day_of_week( $post->ID ); ?></span>
-										<span class="date-label"><?php echo date('d'); ?></span>
-										<span class="month-label"><?php echo date('M'); ?></span>
+										<span class="date-label"><?php brand_show_event_day( $post->ID ); ?></span>
+										<span class="month-label"><?php brand_show_event_month( $post->ID ); ?></span>
 									</div>
 									<?php if ( has_post_thumbnail() ): ?>
 										<div class="featured-image image-wrapper wide"><?php echo the_post_thumbnail(); ?></div>
