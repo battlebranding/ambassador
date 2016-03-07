@@ -1,0 +1,62 @@
+<?php
+
+class Ambassador_Theme {
+
+	protected static $single_instance = null;
+
+	static function init() {
+
+		if ( self::$single_instance === null ) {
+			self::$single_instance = new self();
+		}
+
+		return self::$single_instance;
+
+	}
+
+	public function hooks() {
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_styles_and_scripts' ) );
+		add_action( 'init', array( $this, 'setup_amabassador_theme' ) );
+
+		add_action( 'show_ambassador_breadcrumb', array( $this, 'show_ambassador_breadcrumb' ) );
+	}
+
+	public function load_styles_and_scripts() {
+
+		wp_enqueue_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' );
+		wp_enqueue_style( 'google-font', 'https://fonts.googleapis.com/css?family=Archivo+Black' );
+		wp_enqueue_style( 'brand-new', get_stylesheet_uri() );
+
+	}
+
+	public function setup_amabassador_theme() {
+
+		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'woocommerce' );
+
+	}
+
+	public function show_ambassador_breadcrumb() {
+
+		global $wp;
+
+		$urls_parts = explode( '/', $wp->request );
+
+		print_r( $urls_parts );
+
+		$breadcrumbs = array(
+			home_url() => __( 'Home', 'ambassador' ),
+		);
+		
+		$html = '<a href
+
+		foreach ( $urls_parts as $part ) {
+			
+		}
+
+	}
+
+}
+
+add_action( 'after_setup_theme', array( Ambassador_Theme::init(), 'hooks' ) );
