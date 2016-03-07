@@ -209,6 +209,8 @@ a.button,
 
 #content {
   padding-top: 20px; }
+  #content a {
+    font-weight: bold; }
 
 h2 {
   font-size: 36px; }
