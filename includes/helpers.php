@@ -16,6 +16,10 @@ function show_brand_definition() {
 	echo get_brand_option('brand_definition');
 }
 
+function get_brand_billboard_link() {
+	return get_brand_option('billboard_link');
+}
+
 function get_brand_option( $option_name = '' ) {
 
 	$brand_options = get_option( 'brand' );

@@ -152,10 +152,10 @@ class Ambassador_Theme {
 		) );
 
 		$branding_options->add_field( array(
-			'name'    => __( 'Billboard Font Color', 'ambassador' ),
-			'id'      => 'billboard_font_color',
-			'type'    => 'colorpicker',
-			'default' => '#ffffff',
+			'name'    => __( 'Billboard Link', 'ambassador' ),
+			'id'      => 'billboard_link',
+			'type'    => 'select',
+			'options' => array( $this, 'get_page_permalinks' ),
 		) );
 
 		$branding_options->add_field( array(
@@ -220,6 +220,20 @@ class Ambassador_Theme {
 			'desc'		=> __( 'Select which posts types you want displayed on the homepage', 'ambassador' ),
 			'options'	=> array( $this, 'get_homepage_posts' ),
 		) );
+
+	}
+
+	public function get_page_permalinks() {
+
+		$pages = get_pages();
+		$permalinks = array( '' => '--' );
+
+		foreach ( $pages as $page ) {
+			$permalink = get_permalink( $page->ID );
+			$permalinks[ $permalink ] = $page->post_title;
+		}
+
+		return $permalinks;
 
 	}
 
