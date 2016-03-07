@@ -18,7 +18,7 @@
 						<?php show_brand_position(); ?>
 						<a class="button medium" href="<?php echo get_brand_billboard_link() ?>">Learn More</a>
 					</div>
-					<div class="overlay primary-color"></div>
+					<div class="overlay"></div>
 					<div class="background" style="background-image: url(<?php echo get_brand_option( 'brand_position_background' ); ?>);"></div>
 				</div>
 				<?php endif; ?>

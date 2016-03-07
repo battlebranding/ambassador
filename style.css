@@ -171,7 +171,8 @@ header {
     top: 0;
     left: 0;
     bottom: 0;
-    background-position: center; }
+    background-position: center;
+    background-size: cover; }
   .billboard .overlay {
     z-index: 5;
     opacity: .5; }
