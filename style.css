@@ -324,6 +324,9 @@ img.circle {
 img.center {
   margin: 0 auto; }
 
+iframe {
+  max-width: 100%; }
+
 .woo-menu {
   background-color: #fff;
   padding: 20px;
