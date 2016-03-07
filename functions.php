@@ -27,6 +27,7 @@ class Ambassador_Theme {
 	public function hooks() {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_styles_and_scripts' ) );
+		add_action( 'wp_head', array( $this, 'live_css' ) );
 		add_action( 'init', array( $this, 'setup_amabassador_theme' ) );
 
 		add_action( 'show_ambassador_breadcrumb', array( $this, 'show_breadcrumb' ) );
@@ -67,6 +68,20 @@ class Ambassador_Theme {
 			$landing_page_options['_ambassador_show_landing_page'] = 1;
 			update_option( 'landing-page', $landing_page_options );
 		}
+
+	}
+
+	public function live_css() {
+
+		$primary_color = get_brand_option('primary_color');
+		$secondary_color = get_brand_option('secondary_color');
+
+		$css = '<style>';
+		$css .= "div.primary-color { background-color: $primary_color; }";
+		$css .= "div.secondary-color { background-color: $secondary_color; }";
+		$css .= '</style>';
+
+		echo $css;
 
 	}
 
@@ -117,14 +132,14 @@ class Ambassador_Theme {
 
 		$branding_options->add_field( array(
 			'name'    => __( 'Primary Brand Color', 'ambassador' ),
-			'id'      => $option_key . 'primary_color',
+			'id'      => 'primary_color',
 			'type'    => 'colorpicker',
 			'default' => '#ffffff',
 		) );
 
 		$branding_options->add_field( array(
 			'name'    => __( 'Secondary Brand Color', 'ambassador' ),
-			'id'      => $option_key . 'secondary_color',
+			'id'      => 'secondary_color',
 			'type'    => 'colorpicker',
 			'default' => '#ffffff',
 		) );
