@@ -31,7 +31,7 @@
 										<p class="post-published">Posted <span class="post-date"><?php echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?></span> at <span class="post-time"><?php the_time('gA'); ?></span></p>
 										<h2><?php the_title(); ?></h2>
 										<?php the_excerpt(); ?>
-										<a class="button read-more" href="<?php the_permalink(); ?> ">Read More</a>
+										<a class="button read-more accent-color" href="<?php the_permalink(); ?> ">Read More</a>
 									</div>
 								</div>
 							</article>
