@@ -75,10 +75,17 @@ class Ambassador_Theme {
 
 		$primary_color = get_brand_option('primary_color');
 		$secondary_color = get_brand_option('secondary_color');
+		$accent_color = get_brand_option('accent_color');
+		$base_color = get_brand_option('base_color');
 
 		$css = '<style>';
 		$css .= "div.primary-color { background-color: $primary_color; }";
+		$css .= "p.primary-color { background-color: $primary_color; }";
 		$css .= "div.secondary-color { background-color: $secondary_color; }";
+		$css .= ".button.primary-color { background-color: $primary_color; }";
+		$css .= ".button.secondary-color { background-color: $secondary_color; }";
+		$css .= ".button.accent-color { background-color: $accent_color; }";
+		$css .= ".button.base-color { background-color: $base_color; }";
 		$css .= '</style>';
 
 		echo $css;
@@ -146,7 +153,14 @@ class Ambassador_Theme {
 
 		$branding_options->add_field( array(
 			'name'    => __( 'Accent Brand Color', 'ambassador' ),
-			'id'      => $option_key . 'accent_color',
+			'id'      => 'accent_color',
+			'type'    => 'colorpicker',
+			'default' => '#ffffff',
+		) );
+
+		$branding_options->add_field( array(
+			'name'    => __( 'Accent Brand Color', 'ambassador' ),
+			'id'      => 'base_color',
 			'type'    => 'colorpicker',
 			'default' => '#ffffff',
 		) );

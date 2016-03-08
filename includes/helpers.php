@@ -9,7 +9,7 @@ function show_brand_email() {
 }
 
 function show_brand_position() {
-	echo sprintf( '<p>%s</p>', get_brand_option('brand_position') );
+	echo get_brand_option('brand_position');
 }
 
 function show_brand_definition() {

@@ -18,7 +18,7 @@
 						<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 							<article class="post-wrapper">
 								<div class="post event event-single calendar-item">
-									<div class="calendar-entry">
+									<div class="calendar-entry primary-color">
 										<span class="day-of-week-label"><?php brand_show_event_day_of_week( $post->ID ); ?></span>
 										<span class="date-label"><?php brand_show_event_day( $post->ID ); ?></span>
 										<span class="month-label"><?php brand_show_event_month( $post->ID ); ?></span>

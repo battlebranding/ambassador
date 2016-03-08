@@ -148,7 +148,7 @@ header {
 .billboard {
   background-color: #757779;
   background-position: center;
-  min-height: 400px;
+  min-height: 450px;
   display: table;
   border-radius: 2px;
   padding: 60px;
@@ -156,13 +156,19 @@ header {
   overflow: hidden; }
   .billboard .content {
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: bottom;
     width: 100%;
     text-align: center;
     color: #fff;
     font-size: 30px;
     font-weight: 300;
     z-index: 10; }
+    .billboard .content p {
+      display: inline;
+      box-shadow: 10px 0 0 inherit, -10px 0 0 inherit; }
+      .billboard .content p:after {
+        content: " ";
+        display: block; }
   .billboard .overlay,
   .billboard .background {
     position: absolute;
@@ -202,7 +208,6 @@ header {
 
 a.button,
 .woocommerce a.button {
-  background-color: #3c3d41;
   color: #fff;
   text-transform: uppercase;
   display: inline-block;
@@ -211,10 +216,6 @@ a.button,
   border-radius: 2px;
   line-height: 28px;
   min-width: 100px; }
-  a.button.read-more, a.button.branded,
-  .woocommerce a.button.read-more,
-  .woocommerce a.button.branded {
-    background-color: #2e71f2; }
   a.button.medium,
   .woocommerce a.button.medium {
     min-width: 150px;

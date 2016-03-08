@@ -191,7 +191,7 @@ header {
 .billboard {
 	background-color: #757779;
 	background-position: center;
-	min-height: 400px;
+	min-height: 450px;
 	display: table;
 	border-radius: 2px;
 	padding: 60px;
@@ -200,13 +200,25 @@ header {
 
 	.content {
 		display: table-cell;
-    	vertical-align: middle;
+    	vertical-align: bottom;
 		width: 100%;
 		text-align: center;
 		color: #fff;
 		font-size: 30px;
 		font-weight: 300;
 		z-index: 10;
+
+		p {
+			display: inline;
+		    box-shadow: 10px 0 0 inherit, -10px 0 0 inherit;
+
+		    &:after {
+		    	content: " ";
+		    	display: block;
+		    }
+
+		}
+
 	}
 
 	.overlay,
@@ -267,7 +279,6 @@ header {
 
 a.button,
 .woocommerce a.button {
-	background-color: $dark_grey;
 	color: #fff;
 	text-transform: uppercase;
 	display: inline-block;
@@ -276,11 +287,6 @@ a.button,
 	border-radius: 2px;
 	line-height: 28px;
 	min-width: 100px;
-
-	&.read-more,
-	&.branded {
-		background-color: $brand_primary;
-	}
 
 	&.medium {
 		min-width: 150px;
