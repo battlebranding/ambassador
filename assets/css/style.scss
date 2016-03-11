@@ -501,6 +501,12 @@ h4 {
 		color: $dark_grey;
 	}
 
+	a.button {
+		background-color: #666;
+		min-width: 110px;
+    	line-height: 30px;
+	}
+
 }
 
 .image-wrapper {
@@ -690,6 +696,11 @@ iframe {
 
 		.added_to_cart {
 			display: block;
+		}
+
+		a.button {
+			min-width: initial;
+			letter-spacing: initial;
 		}
 
 	}
