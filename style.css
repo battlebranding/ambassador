@@ -100,8 +100,8 @@ section.hero {
       color: inherit; }
     section.hero .content p {
       color: inherit;
-      font-size: 24px;
-      line-height: 24px; }
+      font-size: 32px;
+      line-height: 32px; }
 section.blog-grid .post {
   padding: 20px;
   display: table-cell;
