@@ -15,8 +15,8 @@
 			<?php do_action( 'before_show_brand_header' ); ?>
 			<?php get_template_part( 'templates/parts/common', 'header' ); ?>
 			<?php do_action( 'after_show_brand_header' ); ?>
-			<section>
-				<div class="content">
+			<section id="content">
+				<div class="page content">
 					<?php $query = new WP_Query( array( 'post_type' => 'post' ) ); ?>
 					<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
 						<article class="post-wrapper">

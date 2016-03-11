@@ -210,6 +210,7 @@ section {
 	.page.content {
 		max-width: 700px;
 		padding: 60px;
+		background-color: #fff;
 	}
 
 }
@@ -235,7 +236,6 @@ article[class^='width-percent-'] { float: left; }
 	margin: 0 auto;
 	display: block;
 	position: relative;
-	background-color: transparent;
 
 	&:after {
 	   content: "";
@@ -384,6 +384,8 @@ a.button,
 }
 
 #content {
+	background-color: #F9F9F9;
+	padding: 25px 0;
 
 	a {
 		font-weight: bold;
@@ -608,8 +610,13 @@ iframe {
 
 		}
 
+		&#content {
+			padding: 0;
+		}
+
 		.page.content {
 			padding: 20px;
+			background-color: #fff;
 		}
 
 	}
