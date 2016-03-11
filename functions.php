@@ -158,6 +158,24 @@ class Ambassador_Theme {
 		) );
 
 		$branding_options->add_field( array(
+			'name' => __( 'Site Icon', 'ambassador' ),
+			'id'   => 'site_icon',
+			'type' => 'file',
+		) );
+
+		$branding_options->add_field( array(
+			'name'    => __( 'Site Summary', 'ambassador' ),
+			'id'      => 'site_summary',
+			'type'    => 'textarea_small',
+		) );
+
+		$branding_options->add_field( array(
+			'name'    => __( 'Site Description', 'ambassador' ),
+			'id'      => 'site_description',
+			'type'    => 'textarea_small',
+		) );
+
+		$branding_options->add_field( array(
 			'name'    => __( 'Primary Brand Color', 'ambassador' ),
 			'id'      => 'primary_color',
 			'type'    => 'colorpicker',
@@ -220,6 +238,8 @@ class Ambassador_Theme {
 			'id'      	=> $option_key . 'social_address',
 			'type'    	=> 'textarea_small',
 		) );
+
+
 
 	}
 
