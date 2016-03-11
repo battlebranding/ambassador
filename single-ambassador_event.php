@@ -7,38 +7,22 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<div class="page">
-				<?php do_action( 'before_show_brand_header' ); ?>
-				<?php get_template_part( 'templates/parts/common', 'header' ); ?>
-				<?php do_action( 'after_show_brand_header' ); ?>
-
-				<div id="content">
-					<div id="feed">
-						<div class="breadcrumb"><?php do_action( 'show_ambassador_breadcrumb' ); ?></div>
-						<article class="post-wrapper">
-							<div class="post">
-								<div class="featured-image image-wrapper"></div>
-								<div class="content">
-									<h2><?php the_title(); ?></h2>
-									<?php echo wpautop( $post->post_content ); ?>
-								</div>
+			<?php do_action( 'before_show_brand_header' ); ?>
+			<?php get_template_part( 'templates/parts/common', 'header' ); ?>
+			<?php do_action( 'after_show_brand_header' ); ?>
+			<section id="content">
+				<div class="page content">
+					<article class="post-wrapper">
+						<div class="post">
+							<div class="featured-image image-wrapper"></div>
+							<div class="content">
+								<h2><?php the_title(); ?></h2>
+								<?php echo wpautop( $post->post_content ); ?>
 							</div>
-						</article>
-					</div>
-					<div id="sidebar">
-						<?php if ( get_theme_support( 'woocommerce' ) ): ?>
-							<h4 class="label">Store Menu</h4>
-							<?php wp_nav_menu( array(
-								'theme_location' => 'sidebar-store-menu',
-								'container' => 'nav',
-								'container_class' => 'woocommerce vertical woo-menu',
-								'menu_class' => 'menu vertical'
-								) );
-								?>
-						<?php endif; ?>
-					</div>
+						</div>
+					</article>
 				</div>
-			</div>
+			</section>
 		</div>
 		<?php get_template_part( 'templates/parts/common', 'footer' ); ?>
 		<?php wp_footer(); ?>
