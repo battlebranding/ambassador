@@ -12,7 +12,6 @@ This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 body {
-  background-color: #3c3d41;
   margin: 0;
   padding: 0;
   font-family: 'Avenir', sans-serif; }
@@ -51,7 +50,8 @@ a {
 
 div,
 header,
-nav {
+nav,
+section {
   display: block;
   box-sizing: border-box;
   position: relative;
@@ -74,6 +74,68 @@ section:after,
   display: block;
   height: 0;
   clear: both; }
+
+section .content {
+  z-index: 100;
+  max-width: 1080px;
+  margin: 0 auto; }
+section.hero {
+  display: table; }
+  section.hero .content {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    position: relative;
+    padding: 0 10%; }
+    section.hero .content h2 {
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 40px;
+      color: inherit; }
+    section.hero .content p {
+      color: inherit;
+      font-size: 24px;
+      line-height: 24px; }
+section.blog-grid .post {
+  padding: 20px;
+  display: table-cell;
+  border-left: 1px solid;
+  border-right: 1px solid; }
+  section.blog-grid .post:first-of-type {
+    border-right: none; }
+section.blog-grid .content {
+  padding: 0 20px;
+  max-width: 1180px;
+  margin: 0 auto; }
+section.blog-grid .post-title {
+  font-size: 26px;
+  font-weight: bold;
+  display: table-cell; }
+section .overlay,
+section .background {
+  position: absolute;
+  width: 100%;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-position: center;
+  background-size: cover; }
+section .background {
+  z-index: 10; }
+section .overlay {
+  z-index: 15;
+  background-color: #333;
+  opacity: .4; }
+section.page-title {
+  background-color: #F9F9F9;
+  padding: 60px;
+  text-align: center; }
+  section.page-title h2 {
+    font-weight: bold; }
+section .page.content {
+  max-width: 700px;
+  padding: 60px; }
 
 /** End Resets **/
 *[class^='width-percent-'],
@@ -107,16 +169,17 @@ article[class^='width-percent-'] {
 .align-text-center {
   text-align: center; }
 
-#wrapper {
-  background-color: #F9F9F9; }
+.float-left {
+  float: left; }
+
+.float-right {
+  float: right; }
 
 .page {
   margin: 0 auto;
   display: block;
   position: relative;
-  padding: 20px 15%;
-  background-color: transparent;
-  margin-bottom: 20px; }
+  background-color: transparent; }
   .page:after {
     content: "";
     visibility: hidden;
@@ -125,9 +188,10 @@ article[class^='width-percent-'] {
     clear: both; }
 
 header {
-  padding: 20px 0; }
+  padding: 10px 0; }
   header nav {
-    line-height: 36px; }
+    line-height: 36px;
+    padding: 5px; }
 
 .menu {
   color: #999999;
@@ -180,23 +244,8 @@ header {
     background-position: center;
     background-size: cover; }
   .billboard .overlay {
-    z-index: 5;
+    z-index: 15;
     opacity: .5; }
-
-.blog-grid {
-  background-color: #fff;
-  display: table; }
-  .blog-grid > div {
-    display: table-cell; }
-  .blog-grid .post-wrapper {
-    border-right: 1px solid #eee; }
-    .blog-grid .post-wrapper:last-of-type {
-      border-right: none; }
-  .blog-grid .post-title {
-    font-size: 26px;
-    font-weight: bold;
-    height: 70px;
-    display: table-cell; }
 
 .site-notice {
   background-color: #2e71f2;
@@ -213,18 +262,27 @@ a.button,
   display: inline-block;
   text-align: center;
   font-size: 12px;
-  border-radius: 2px;
-  line-height: 28px;
-  min-width: 100px; }
+  border-radius: 3px;
+  line-height: 50px;
+  min-width: 100px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding: 0 20px; }
   a.button.medium,
   .woocommerce a.button.medium {
     min-width: 150px;
     line-height: 40px; }
+  a.button.small,
+  .woocommerce a.button.small {
+    min-width: 110px;
+    line-height: 30px; }
+  a.button.outlined,
+  .woocommerce a.button.outlined {
+    border: 2px solid;
+    background-color: transparent; }
 
-#content {
-  padding-top: 20px; }
-  #content a {
-    font-weight: bold; }
+#content a {
+  font-weight: bold; }
 
 h2 {
   font-size: 36px; }
@@ -248,7 +306,8 @@ h4 {
   padding-left: 20px; }
 
 .post-wrapper {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  border-bottom: 1px solid #CCC; }
   .post-wrapper .post {
     background-color: #fff;
     /*box-shadow: 0 0 5px #CCC;*/
@@ -310,7 +369,6 @@ footer {
   padding: 40px 0;
   color: #fff; }
   footer section {
-    padding: 20px 15%;
     margin: 0 auto; }
   footer .copyright,
   footer .brand-email {
@@ -333,12 +391,14 @@ footer {
   display: none; }
 
 /** images */
-img.alignnone {
-  display: block; }
-img.circle {
-  border-radius: 50%; }
-img.center {
-  margin: 0 auto; }
+img {
+  max-width: 100%; }
+  img.alignnone {
+    display: block; }
+  img.circle {
+    border-radius: 50%; }
+  img.center {
+    margin: 0 auto; }
 
 iframe {
   max-width: 100%; }
@@ -354,8 +414,17 @@ iframe {
     width: 100%;
     margin-bottom: 10px; }
 
+  section .content {
+    padding: 0 15px; }
+  section.blog-grid .post {
+    display: block;
+    width: 100%;
+    border: none; }
+  section .page.content {
+    padding: 20px; }
+
   header {
-    padding: 20px 10px;
+    padding: 20px;
     text-align: center; }
     header .align-text-left,
     header .align-text-right {
@@ -364,15 +433,6 @@ iframe {
   .billboard {
     border-radius: 0;
     margin-bottom: 0; }
-
-  .blog-grid {
-    display: block; }
-    .blog-grid > div {
-      display: block;
-      width: 100%; }
-    .blog-grid .post-wrapper {
-      border-right: none;
-      border-bottom: 1px solid #eee; }
 
   footer .align-text-right {
     text-align: initial; }
@@ -386,9 +446,6 @@ iframe {
     width: 100%;
     float: none;
     padding-right: 0; }
-
-  .page {
-    padding: 0; }
 
   .woocommerce ul.products {
     list-style: none; }
@@ -408,9 +465,6 @@ iframe {
 
   .breadcrumb {
     margin-bottom: 30px;
-    text-align: center; }
-
-  #content {
-    padding: 0 20px; } }
+    text-align: center; } }
 
 /*# sourceMappingURL=style.css.map */

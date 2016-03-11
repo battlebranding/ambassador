@@ -21,6 +21,7 @@ class Ambassador_Theme {
 		}
 
 		include_once 'includes/helpers.php';
+		include_once 'includes/post-types/sections.php';
 
 	}
 
@@ -33,6 +34,7 @@ class Ambassador_Theme {
 		add_action( 'show_ambassador_breadcrumb', array( $this, 'show_breadcrumb' ) );
 
 		add_action( 'admin_menu', array( $this, 'add_branding_menu' ) );
+		add_action( 'cmb2_admin_init', array( $this, 'home_page_settings' ) );
 		add_action( 'cmb2_admin_init', array( $this, 'brand_settings' ) );
 		add_action( 'cmb2_admin_init', array( $this, 'landing_page_settings' ) );
 
@@ -94,8 +96,41 @@ class Ambassador_Theme {
 
 	public function add_branding_menu() {
 
+		add_theme_page( 'Home', 'Home', 'manage_options', 'home-settings', array( $this, 'home_settings_page' ) );
 		add_theme_page( 'Branding', 'Branding', 'manage_options', 'brand', array( $this, 'brand_settings_page' ) );
 		add_theme_page( 'Landing Page', 'Landing Page', 'manage_options', 'landing-page', array( $this, 'show_landing_page_settings' ) );
+
+	}
+
+	public function home_page_settings() {
+
+		$home_page_options = new_cmb2_box( array(
+			'id'      => 'home_page_options_metabox',
+			'title'   => __( 'Home Page Options', 'ambassador' ),
+			'hookup'     => false,
+			'show_on'    => array(
+				'key'   => 'options-page',
+				'value' => array( 'home-settings' )
+			),
+		) );
+
+		$sections_group_field_id = $home_page_options->add_field( array(
+			'id'          => 'sections',
+			'type'        => 'group',
+			'description' => __( 'Controls which sections display on the homepage', 'ambassador' ),
+			'options'     => array(
+				'group_title'   => __( 'Section {#}', 'amabassador' ),
+				'add_button'    => __( 'Add Another Section', 'ambassador' ),
+				'remove_button' => __( 'Remove Section', 'ambassador' ),
+				'sortable'      => true, // beta
+			),
+		) );
+
+		$home_page_options->add_group_field( $sections_group_field_id, array(
+			'name'       => __( 'Section', 'ambassador' ),
+			'id'         => 'section',
+			'type'       => 'section_select',
+		) );
 
 	}
 
@@ -116,24 +151,9 @@ class Ambassador_Theme {
 		) );
 
 		$branding_options->add_field( array(
-			'name' => __( 'Site Background', 'ambassador' ),
-			'desc' => __( 'Upload an image or enter a URL.', 'amabassador' ),
-			'id'   => 'site_background',
-			'type' => 'file',
-		) );
-
-		$branding_options->add_field( array(
-			'name' => __( 'Site Background Color', 'ambassador' ),
-			'desc' => __( 'Upload an image or enter a URL.', 'amabassador' ),
-			'id'   => 'site_background_color',
-			'type'    => 'colorpicker',
-			'default' => '#ffffff',
-		) );
-
-		$branding_options->add_field( array(
 			'name' => __( 'Logo', 'ambassador' ),
 			'desc' => __( 'Upload an image or enter a URL.', 'amabassador' ),
-			'id'   => $option_key . 'logo',
+			'id'   => 'logo',
 			'type' => 'file',
 		) );
 
@@ -159,36 +179,10 @@ class Ambassador_Theme {
 		) );
 
 		$branding_options->add_field( array(
-			'name'    => __( 'Accent Brand Color', 'ambassador' ),
+			'name'    => __( 'Base Brand Color', 'ambassador' ),
 			'id'      => 'base_color',
 			'type'    => 'colorpicker',
 			'default' => '#ffffff',
-		) );
-
-		$branding_options->add_field( array(
-			'name'    => __( 'Billboard Link', 'ambassador' ),
-			'id'      => 'billboard_link',
-			'type'    => 'select',
-			'options' => array( $this, 'get_page_permalinks' ),
-		) );
-
-		$branding_options->add_field( array(
-			'name'    	=> __( 'Brand Position', 'ambassador' ),
-			'id'      	=> 'brand_position',
-			'type'    	=> 'textarea_small',
-		) );
-
-		$branding_options->add_field( array(
-			'name' => __( 'Brand Position Background', 'ambassador' ),
-			'desc' => __( 'Upload an image or enter a URL.', 'amabassador' ),
-			'id'   => 'brand_position_background',
-			'type' => 'file',
-		) );
-
-		$branding_options->add_field( array(
-			'name'    	=> __( 'Brand Definition', 'ambassador' ),
-			'id'      	=> 'brand_definition',
-			'type'    	=> 'textarea_small',
 		) );
 
 		$branding_options->add_field( array(
@@ -225,14 +219,6 @@ class Ambassador_Theme {
 			'name'    	=> __( 'Address', 'ambassador' ),
 			'id'      	=> $option_key . 'social_address',
 			'type'    	=> 'textarea_small',
-		) );
-
-		$branding_options->add_field( array(
-			'name'    	=> __( 'Homepage Post Types to Display', 'ambassador' ),
-			'id'      	=> $option_key . 'homepage_posts',
-			'type'    	=> 'multicheck',
-			'desc'		=> __( 'Select which posts types you want displayed on the homepage', 'ambassador' ),
-			'options'	=> array( $this, 'get_homepage_posts' ),
 		) );
 
 	}
@@ -295,6 +281,15 @@ class Ambassador_Theme {
 
 	}
 
+	public function home_settings_page() {
+		?>
+		<div class="wrap cmb2-options-page home">
+			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+			<?php cmb2_metabox_form( 'home_page_options_metabox', 'home-settings' ); ?>
+		</div>
+		<?php
+	}
+
 	public function brand_settings_page() {
 		?>
 		<div class="wrap cmb2-options-page brand">
@@ -317,7 +312,6 @@ class Ambassador_Theme {
 
 		$pages = array(
 			'blog' => __( 'Blog', 'ambassador' ),
-			'landing' => __( 'Landing', 'ambassador' )
 		);
 
 		foreach ( $pages as $page => $page_title ) {

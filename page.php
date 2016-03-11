@@ -7,38 +7,20 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<div class="page">
-				<?php do_action( 'before_show_brand_header' ); ?>
-				<?php get_template_part( 'templates/parts/common', 'header' ); ?>
-				<?php do_action( 'after_show_brand_header' ); ?>
-
-				<div id="content">
-					<div id="feed">
-						<div class="breadcrumb"><?php do_action( 'show_ambassador_breadcrumb' ); ?></div>
-						<article class="post-wrapper">
-							<div class="post">
-								<div class="featured-image image-wrapper"></div>
-								<div class="content">
-									<h2><?php echo $post->post_title; ?></h2>
-									<?php echo do_shortcode( wpautop( $post->post_content ) ); ?>
-								</div>
-							</div>
-						</article>
-					</div>
-					<div id="sidebar">
-						<?php if ( get_theme_support( 'woocommerce' ) ): ?>
-							<h4 class="label">Store Menu</h4>
-							<?php wp_nav_menu( array(
-								'theme_location' => 'sidebar-store-menu',
-								'container' => 'nav',
-								'container_class' => 'woocommerce vertical woo-menu',
-								'menu_class' => 'menu vertical'
-								) );
-								?>
-						<?php endif; ?>
-					</div>
+			<?php do_action( 'before_show_brand_header' ); ?>
+			<?php get_template_part( 'templates/parts/common', 'header' ); ?>
+			<?php do_action( 'show_sections_before_content' ); ?>
+			<section class="page-title">
+				<div class="content">
+					<h2><?php echo $post->post_title; ?></h2>
 				</div>
-			</div>
+			</section>
+			<section id="content">
+				<div class="page content">
+					<?php echo do_shortcode( wpautop( $post->post_content ) ); ?>
+				</div>
+			</section>
+			<?php do_action( 'show_sections_after_content' ); ?>
 		</div>
 		<?php get_template_part( 'templates/parts/common', 'footer' ); ?>
 		<?php wp_footer(); ?>

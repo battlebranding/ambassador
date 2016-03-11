@@ -21,7 +21,6 @@ $base_color: #3c3d41;
 $inverse_color: #FFFFFF;
 
 body {
-	background-color: $dark_grey;
 	margin: 0;
 	padding: 0;
 	font-family: 'Avenir', sans-serif;
@@ -65,7 +64,8 @@ a {
 
 div,
 header,
-nav {
+nav,
+section {
 	display: block;
 	box-sizing: border-box;
 	position: relative;
@@ -111,6 +111,109 @@ section,
 
 }
 
+section {
+
+	.content {
+		z-index: 100;
+		max-width: 1080px;
+		margin: 0 auto;
+	}
+
+	&.hero {
+		display: table;
+
+		.content {
+			display: table-cell;
+	    	vertical-align: middle;
+			width: 100%;
+			position: relative;
+			padding: 0 10%;
+
+			h2 {
+				font-size: 32px;
+    			font-weight: bold;
+    			line-height: 40px;
+    			color: inherit;
+			}
+
+			p {
+				color: inherit;
+				font-size: 24px;
+				line-height: 24px;
+			}
+
+		}
+
+	}
+
+	&.blog-grid {
+
+		.post {
+			padding: 20px;
+			display: table-cell;
+			border-left: 1px solid;
+			border-right: 1px solid;
+
+			&:first-of-type {
+				border-right: none;
+			}
+
+		}
+
+		.content {
+			padding: 0 20px;
+			max-width: 1180px;
+			margin: 0 auto;
+		}
+
+		.post-title {
+			font-size: 26px;
+			font-weight: bold;
+			display: table-cell;
+		}
+
+	}
+
+	.overlay,
+	.background {
+		position: absolute;
+		width: 100%;
+		display: block;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		background-position: center;
+		background-size: cover;
+	}
+
+	.background {
+		z-index: 10;
+	}
+
+	.overlay {
+		z-index: 15;
+		background-color: #333;
+		opacity: .4;
+	}
+
+	&.page-title {
+		background-color: #F9F9F9;
+		padding: 60px;
+		text-align: center;
+
+		h2 {
+			font-weight: bold;
+		}
+
+	}
+
+	.page.content {
+		max-width: 700px;
+		padding: 60px;
+	}
+
+}
+
 /** End Resets **/
 *[class^='width-percent-'],
 article[class^='width-percent-'] { float: left; }
@@ -125,17 +228,14 @@ article[class^='width-percent-'] { float: left; }
 .align-text-right { text-align: right; }
 .align-text-center { text-align: center; }
 
-#wrapper {
-	background-color: $light_grey;
-}
+.float-left { float: left; }
+.float-right { float: right; }
 
 .page {
 	margin: 0 auto;
 	display: block;
 	position: relative;
-	padding: 20px 15%;
 	background-color: transparent;
-	margin-bottom: 20px;
 
 	&:after {
 	   content: "";
@@ -148,10 +248,11 @@ article[class^='width-percent-'] { float: left; }
 }
 
 header {
-	padding: 20px 0;
+	padding: 10px 0;
 
 	nav {
 		line-height: 36px;
+		padding: 5px;
 	}
 
 }
@@ -234,34 +335,8 @@ header {
 	}
 
 	.overlay {
-		z-index: 5;
+		z-index: 15;
 		opacity: .5;
-	}
-
-}
-
-.blog-grid {
-	background-color: #fff;
-	display: table;
-
-	> div {
-		display: table-cell;
-	}
-
-	.post-wrapper {
-		border-right: 1px solid #eee;
-
-		&:last-of-type {
-			border-right: none;
-		}
-
-	}
-
-	.post-title {
-		font-size: 26px;
-		font-weight: bold;
-		height: 70px;
-		display: table-cell;
 	}
 
 }
@@ -284,19 +359,31 @@ a.button,
 	display: inline-block;
 	text-align: center;
 	font-size: 12px;
-	border-radius: 2px;
-	line-height: 28px;
+	border-radius: 3px;
+	line-height: 50px;
 	min-width: 100px;
+	letter-spacing: 2px;
+	font-weight: bold;
+	padding: 0 20px;
 
 	&.medium {
 		min-width: 150px;
 		line-height: 40px;
 	}
 
+	&.small {
+		min-width: 110px;
+    	line-height: 30px;
+	}
+
+	&.outlined {
+		border: 2px solid;
+		background-color: transparent;
+	}
+
 }
 
 #content {
-	padding-top: 20px;
 
 	a {
 		font-weight: bold;
@@ -338,6 +425,7 @@ h4 {
 
 .post-wrapper {
 	margin-bottom: 20px;
+	border-bottom: 1px solid #CCC;
 
 	.post {
 		background-color: #fff;
@@ -437,7 +525,6 @@ footer {
 	color: #fff;
 
 	section {
-		padding: 20px 15%;
 		margin: 0 auto;
 	}
 
@@ -471,6 +558,7 @@ footer {
 
 /** images */
 img {
+	max-width: 100%;
 
 	&.alignnone {
 		display: block;
@@ -504,8 +592,30 @@ iframe {
 		margin-bottom: 10px;
 	}
 
+	section {
+
+		.content {
+			padding: 0 15px;
+		}
+
+		&.blog-grid {
+
+			.post {
+				display: block;
+				width: 100%;
+				border: none;
+			}
+
+		}
+
+		.page.content {
+			padding: 20px;
+		}
+
+	}
+
 	header {
-		padding: 20px 10px;
+		padding: 20px;
 		text-align: center;
 
 		.align-text-left,
@@ -518,21 +628,6 @@ iframe {
 	.billboard {
 		border-radius: 0;
 		margin-bottom: 0;
-	}
-
-	.blog-grid {
-
-		display: block;
-
-		> div {
-			display: block;
-			width: 100%;
-		}
-
-		.post-wrapper {
-			border-right: none;
-			border-bottom: 1px solid #eee;
-		}
 	}
 
 	footer {
@@ -553,10 +648,6 @@ iframe {
 		width: 100%;
 		float: none;
 		padding-right: 0;
-	}
-
-	.page {
-		padding: 0;
 	}
 
 	.woocommerce {
@@ -591,10 +682,6 @@ iframe {
 	.breadcrumb {
 		margin-bottom: 30px;
 		text-align: center;
-	}
-
-	#content {
-		padding: 0 20px;
 	}
 
 }
