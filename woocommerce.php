@@ -7,16 +7,11 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<div class="page">
-				<?php do_action( 'before_show_brand_header' ); ?>
-				<?php get_template_part( 'templates/parts/common', 'header' ); ?>
-				<?php do_action( 'after_show_brand_header' ); ?>
-
-				<div id="content" class="woocommerce">
-					<div id="feed">
-						<div class="breadcrumb"><?php do_action( 'show_ambassador_breadcrumb' ); ?></div>
-						<?php woocommerce_content(); ?>
-					</div>
+			<?php do_action( 'before_show_brand_header' ); ?>
+			<?php get_template_part( 'templates/parts/common', 'header' ); ?>
+			<?php do_action( 'after_show_brand_header' ); ?>
+			<section id="content" class="woocommerce">
+				<div class="content">
 					<div id="sidebar">
 						<?php if ( get_theme_support( 'woocommerce' ) ): ?>
 							<h4 class="label">Store Menu</h4>
@@ -29,8 +24,11 @@
 								?>
 						<?php endif; ?>
 					</div>
+					<div id="feed">
+						<?php woocommerce_content(); ?>
+					</div>
 				</div>
-			</div>
+			</section>
 		</div>
 		<?php get_template_part( 'templates/parts/common', 'footer' ); ?>
 		<?php wp_footer(); ?>
