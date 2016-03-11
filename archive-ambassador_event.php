@@ -11,7 +11,7 @@
 			<?php get_template_part( 'templates/parts/common', 'header' ); ?>
 			<?php do_action( 'after_show_brand_header' ); ?>
 			<section id="content">
-				<div class="content">
+				<div class="page content">
 					<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 						<article class="post-wrapper">
 							<div class="post event event-single calendar-item">
