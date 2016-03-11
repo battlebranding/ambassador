@@ -13,27 +13,24 @@
 			<section id="content">
 				<div class="page content">
 					<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-						<article class="post-wrapper">
-							<div class="post event event-single calendar-item">
-								<div class="calendar-entry primary-color">
-									<span class="day-of-week-label"><?php brand_show_event_day_of_week( $post->ID ); ?></span>
-									<span class="date-label"><?php brand_show_event_day( $post->ID ); ?></span>
-									<span class="month-label"><?php brand_show_event_month( $post->ID ); ?></span>
-								</div>
-								<?php if ( has_post_thumbnail() ): ?>
-									<div class="featured-image image-wrapper wide"><?php echo the_post_thumbnail(); ?></div>
-								<?php endif; ?>
-								<div class="content">
-									<span class="event-title"><a href="<?php the_permalink(); ?> "><?php the_title(); ?></a></span>
-									<span class="event-location"><?php brand_show_event_location( $post->ID ); ?></span>
-									<span class="event-date"><?php brand_show_event_date( $post->ID ); ?></span>
-								</div>
-								<a class="reveal-more" href="<?php the_permalink(); ?> ">
-									<i class="fa fa-angle-right"></i>
-								</a>
+						<div class="post event event-single calendar-item">
+							<div class="calendar-entry primary-color">
+								<span class="day-of-week-label"><?php brand_show_event_day_of_week( $post->ID ); ?></span>
+								<span class="date-label"><?php brand_show_event_day( $post->ID ); ?></span>
+								<span class="month-label"><?php brand_show_event_month( $post->ID ); ?></span>
 							</div>
-						</article>
-
+							<?php if ( has_post_thumbnail() ): ?>
+								<div class="featured-image image-wrapper wide"><?php echo the_post_thumbnail(); ?></div>
+							<?php endif; ?>
+							<div class="event-details">
+								<span class="event-title"><a href="<?php the_permalink(); ?> "><?php the_title(); ?></a></span>
+								<span class="event-location"><?php brand_show_event_location( $post->ID ); ?></span>
+								<span class="event-date"><?php brand_show_event_date( $post->ID ); ?></span>
+							</div>
+							<a class="reveal-more" href="<?php the_permalink(); ?> ">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</div>
 					<?php endwhile; else: ?>
 						<p>No events at this time.</p>
 					<?php endif; ?>
