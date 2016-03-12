@@ -193,6 +193,8 @@ header {
   header nav {
     line-height: 36px;
     padding: 5px; }
+  header img {
+    max-height: 100px; }
 
 .menu {
   color: #999999;
