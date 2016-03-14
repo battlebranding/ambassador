@@ -253,7 +253,7 @@ class Ambassador_Theme_Sections {
 
 		$button_html = sprintf( '<a class="button primary-color" href="%s">%s</a>', $section_link, $link_label );
 
-		$html = '<section class="hero align-text-center" style="min-height: ' . $height . 'px;">';
+		$html = '<section class="hero align-text-center" style="height: ' . $height . 'px;">';
 
 		$html .= '<div class="content" style="color: ' . $content_color . ';">';
 		$html .= wpautop( $content );
