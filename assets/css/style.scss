@@ -130,6 +130,7 @@ section {
 
 	&.hero {
 		display: table;
+		padding: 80px 20px;
 
 		.content {
 			display: table-cell;
@@ -145,10 +146,11 @@ section {
     			color: inherit;
 			}
 
-			p {
+			 p {
 				color: inherit;
-				font-size: 32px;
-				line-height: 32px;
+				font-size: 20px;
+			    font-weight: 100;
+			    letter-spacing: .5px;
 			}
 
 		}
@@ -198,28 +200,6 @@ section {
 
 	}
 
-	.overlay,
-	.background {
-		position: absolute;
-		width: 100%;
-		display: block;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		background-position: center;
-		background-size: cover;
-	}
-
-	.background {
-		z-index: 10;
-	}
-
-	.overlay {
-		z-index: 15;
-		background-color: #333;
-		opacity: .4;
-	}
-
 	&.page-title {
 		background-color: #F9F9F9;
 		padding: 60px;
@@ -231,6 +211,44 @@ section {
 
 	}
 
+	span.headline {
+		color: inherit;
+	    font-size: 32px;
+	    line-height: 32px;
+	    margin-bottom: 32px;
+	    display: block;
+	    text-transform: uppercase;
+	    letter-spacing: 3px;
+	    font-weight: bold;
+	}
+
+}
+
+.overlay,
+.background {
+	position: absolute;
+	width: 100%;
+	display: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background-position: center;
+	background-size: cover;
+}
+
+.background {
+	z-index: 10;
+}
+
+.overlay {
+	z-index: 15;
+	background-color: #333;
+	opacity: .5;
+}
+
+
+#wrapper > section:first-of-type {
+    padding-top: 180px;
 }
 
 /** End Resets **/
@@ -257,15 +275,28 @@ article[class^='width-percent-'] { float: left; }
 }
 
 header {
-	padding: 10px 0;
+	padding: 10px 5% 0;
+	position: absolute;
+	top: 0;
+	z-index: 999;
+
+	> section {
+		z-index: 20;
+	}
 
 	nav {
-		line-height: 36px;
-		padding: 5px;
+		display: flex;
+    	align-items: center;
+    	height: 55px;
+
+		&.float-right .menu {
+			/*line-height: 75px;*/
+		}
+
 	}
 
 	img {
-		max-height: 100px;
+		max-height: 75px;
 	}
 
 }
@@ -274,6 +305,8 @@ header {
 
 	color: $second_grey;
 	line-height: 24px;
+	display: block;
+    width: 100%;
 
 	a {
 
@@ -299,58 +332,6 @@ header {
 	}
 
 	&.vertical li { display: block; }
-
-}
-
-.billboard {
-	background-color: #757779;
-	background-position: center;
-	min-height: 450px;
-	display: table;
-	border-radius: 2px;
-	padding: 60px;
-	margin-bottom: 20px;
-	overflow: hidden;
-
-	.content {
-		display: table-cell;
-    	vertical-align: bottom;
-		width: 100%;
-		text-align: center;
-		color: #fff;
-		font-size: 30px;
-		font-weight: 300;
-		z-index: 10;
-
-		p {
-			display: inline;
-		    box-shadow: 10px 0 0 inherit, -10px 0 0 inherit;
-
-		    &:after {
-		    	content: " ";
-		    	display: block;
-		    }
-
-		}
-
-	}
-
-	.overlay,
-	.background {
-		position: absolute;
-		width: 100%;
-		display: block;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		background-position: center;
-		background-size: cover;
-	}
-
-	.overlay {
-		z-index: 15;
-		opacity: .5;
-	}
 
 }
 
@@ -387,6 +368,10 @@ a.button,
 	&.small {
 		min-width: 110px;
     	line-height: 30px;
+	}
+
+	&.solid {
+		background-color: inherit;
 	}
 
 	&.outlined {
@@ -640,7 +625,6 @@ iframe {
 	}
 
 	header {
-		padding: 20px;
 		text-align: center;
 
 		.align-text-left,
@@ -648,6 +632,18 @@ iframe {
 			text-align: center;
 		}
 
+		nav {
+
+			&.float-right .menu {
+				line-height: 24px;
+			}
+
+		}
+
+	}
+
+	#wrapper > section:first-of-type {
+	    padding-top: 200px;
 	}
 
 	.billboard {

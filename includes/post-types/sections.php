@@ -32,7 +32,8 @@ class Ambassador_Theme_Sections {
 			'public' 	=> true,
 			'label'  	=> 'Sections',
 			'menu_icon'	=> 'dashicons-exerpt-view',
-			'supports'	=> array( 'title' )
+			'supports'	=> array( 'title' ),
+			'menu_position' => 57
 	    );
 
 	    register_post_type( 'section', $args );
@@ -57,14 +58,16 @@ class Ambassador_Theme_Sections {
 			'type'             => 'select',
 			'show_option_none' => true,
 			'options'          => apply_filters( 'ambassador_section_types', array(
-				'hero' 		=> __( 'Hero', 'ambassador' ),
 				'blog_grid' => __( 'Blog Grid', 'ambassador' ),
+				'footer' => __( 'Footer', 'ambassador' ),
+				'header' => __( 'Header', 'ambassador' ),
+				'hero' 		=> __( 'Hero', 'ambassador' ),
 			) ),
 		) );
 
 		$section_metabox->add_field( array(
-			'name' => __( 'Display Title', 'ambassador' ),
-			'id'   => $prefix . 'title',
+			'name' => __( 'Headline', 'ambassador' ),
+			'id'   => $prefix . 'headline',
 			'type' => 'text',
 		) );
 
@@ -132,6 +135,12 @@ class Ambassador_Theme_Sections {
 		) );
 
 		$section_metabox->add_field( array(
+			'name' => __( 'Overlay Color', 'ambassador' ),
+			'id'   => $prefix . 'overlay_color',
+			'type' => 'colorpicker',
+		) );
+
+		$section_metabox->add_field( array(
 			'name' => __( 'Show Link', 'ambassador' ),
 			'desc' => __( 'Toggle to show a link button or not', 'ambassador' ),
 			'id'   => $prefix . 'show_link',
@@ -146,9 +155,15 @@ class Ambassador_Theme_Sections {
 			'show_option_none' => true,
 			'options' => array(
 				'link' 		=> 'Link',
-				'flat' 		=> 'Flat',
+				'solid' 		=> 'Solid',
 				'outlined'	=> 'Outlined'
 			),
+		) );
+
+		$section_metabox->add_field( array(
+			'name' => __( 'Button Color', 'ambassador' ),
+			'id'   => $prefix . 'button_color',
+			'type' => 'colorpicker',
 		) );
 
 		$section_metabox->add_field( array(
@@ -221,7 +236,7 @@ class Ambassador_Theme_Sections {
 
 		if ( is_home() ) {
 
-			$home_settings = get_option( 'home-settings' );
+			$home_settings = get_option( 'layout-settings' );
 			$home_sections = isset( $home_settings['sections'] ) ? $home_settings['sections'] : array();
 
 			foreach ( $home_sections as $section ) {
@@ -239,28 +254,41 @@ class Ambassador_Theme_Sections {
 
 	public function show_hero_section( $section_id ) {
 
-		$height = get_post_meta( $section_id, '_ambassador_section_height', true );
-		$content = get_post_meta( $section_id, '_ambassador_section_content', true );
-		$content_color = get_post_meta( $section_id, '_ambassador_section_content_color', true );
+		$headline = get_post_meta( $section_id, '_ambassador_section_headline', true );
+		$headline = ( $headline ) ? '<span class="headline">' . $headline . '</span>' : '';
 
-		$background_url = get_post_meta( $section_id, '_ambassador_section_background', true );
-		$background_color = get_post_meta( $section_id, '_ambassador_section_background_color', true );
+		$content = get_post_meta( $section_id, '_ambassador_section_content', true );
+		$content = ( $content ) ? wpautop( $content ) : '';
+		$content_color = get_post_meta( $section_id, '_ambassador_section_content_color', true );
 
 		$show_link = get_post_meta( $section_id, '_ambassador_section_show_link', true );
 		$show_link = ( 'on' == $show_link ) ? true : false;
 		$link_label = get_post_meta( $section_id, '_ambassador_section_link_label', true );
 		$section_link = get_post_meta( $section_id, '_ambassador_section_links_to', true );
 
-		$button_html = sprintf( '<a class="button primary-color" href="%s">%s</a>', $section_link, $link_label );
+		$button_style = get_post_meta( $section_id, '_ambassador_section_button_style', true );
+		$button_color = get_post_meta( $section_id, '_ambassador_section_button_color', true );
+		$button_html = sprintf( '<a class="button %s" style="color: %s;" href="%s">%s</a>', $button_style, $button_color, $section_link, $link_label );
+
+		$background_url = get_post_meta( $section_id, '_ambassador_section_background', true );
+		$background_color = get_post_meta( $section_id, '_ambassador_section_background_color', true );
+
+		$show_overlay = get_post_meta( $section_id, '_ambassador_section_show_overlay', true );
+		$overlay_color = get_post_meta( $section_id, '_ambassador_section_overlay_color', true );
+		$overlay_color = ( $overlay_color ) ? $overlay_color : '#333333';
+
+		$height = get_post_meta( $section_id, '_ambassador_section_height', true );
+
 
 		$html = '<section class="hero align-text-center" style="height: ' . $height . 'px;">';
 
 		$html .= '<div class="content" style="color: ' . $content_color . ';">';
-		$html .= wpautop( $content );
+		$html .= $headline;
+		$html .= $content;
 		$html .= ( $show_link ) ? $button_html : '';
 		$html .= '</div>';
 
-		$html .= '<div class="overlay"></div>';
+		$html .= ( $show_overlay ) ? '<div class="overlay" style="background-color: ' . $overlay_color . '"></div>' : '';
 		$html .= '<div class="background" style="background-image: url(' . $background_url . '); background-color: ' . $background_color . ';"></div>';
 		$html .= "</section>";
 

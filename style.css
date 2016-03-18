@@ -86,7 +86,8 @@ section .content {
     height: 0;
     clear: both; }
 section.hero {
-  display: table; }
+  display: table;
+  padding: 80px 20px; }
   section.hero .content {
     display: table-cell;
     vertical-align: middle;
@@ -100,8 +101,9 @@ section.hero {
       color: inherit; }
     section.hero .content p {
       color: inherit;
-      font-size: 32px;
-      line-height: 32px; }
+      font-size: 20px;
+      font-weight: 100;
+      letter-spacing: .5px; }
 section.blog-grid .post {
   padding: 20px;
   display: table-cell;
@@ -122,8 +124,24 @@ section#content .content {
   background-color: #fff; }
   section#content .content.page, section#content .content.post {
     max-width: 700px; }
-section .overlay,
-section .background {
+section.page-title {
+  background-color: #F9F9F9;
+  padding: 60px;
+  text-align: center; }
+  section.page-title h2 {
+    font-weight: bold; }
+section span.headline {
+  color: inherit;
+  font-size: 32px;
+  line-height: 32px;
+  margin-bottom: 32px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: bold; }
+
+.overlay,
+.background {
   position: absolute;
   width: 100%;
   display: block;
@@ -132,18 +150,17 @@ section .background {
   bottom: 0;
   background-position: center;
   background-size: cover; }
-section .background {
+
+.background {
   z-index: 10; }
-section .overlay {
+
+.overlay {
   z-index: 15;
   background-color: #333;
-  opacity: .4; }
-section.page-title {
-  background-color: #F9F9F9;
-  padding: 60px;
-  text-align: center; }
-  section.page-title h2 {
-    font-weight: bold; }
+  opacity: .5; }
+
+#wrapper > section:first-of-type {
+  padding-top: 180px; }
 
 /** End Resets **/
 *[class^='width-percent-'],
@@ -189,16 +206,26 @@ article[class^='width-percent-'] {
   position: relative; }
 
 header {
-  padding: 10px 0; }
+  padding: 10px 5% 0;
+  position: absolute;
+  top: 0;
+  z-index: 999; }
+  header > section {
+    z-index: 20; }
   header nav {
-    line-height: 36px;
-    padding: 5px; }
+    display: flex;
+    align-items: center;
+    height: 55px; }
+    header nav.float-right .menu {
+      /*line-height: 75px;*/ }
   header img {
-    max-height: 100px; }
+    max-height: 75px; }
 
 .menu {
   color: #999999;
-  line-height: 24px; }
+  line-height: 24px;
+  display: block;
+  width: 100%; }
   .menu a.selected {
     color: #fff;
     font-weight: bold; }
@@ -211,44 +238,6 @@ header {
       margin-right: 0; }
   .menu.vertical li {
     display: block; }
-
-.billboard {
-  background-color: #757779;
-  background-position: center;
-  min-height: 450px;
-  display: table;
-  border-radius: 2px;
-  padding: 60px;
-  margin-bottom: 20px;
-  overflow: hidden; }
-  .billboard .content {
-    display: table-cell;
-    vertical-align: bottom;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    font-size: 30px;
-    font-weight: 300;
-    z-index: 10; }
-    .billboard .content p {
-      display: inline;
-      box-shadow: 10px 0 0 inherit, -10px 0 0 inherit; }
-      .billboard .content p:after {
-        content: " ";
-        display: block; }
-  .billboard .overlay,
-  .billboard .background {
-    position: absolute;
-    width: 100%;
-    display: block;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    background-position: center;
-    background-size: cover; }
-  .billboard .overlay {
-    z-index: 15;
-    opacity: .5; }
 
 .site-notice {
   background-color: #2e71f2;
@@ -279,6 +268,9 @@ a.button,
   .woocommerce a.button.small {
     min-width: 110px;
     line-height: 30px; }
+  a.button.solid,
+  .woocommerce a.button.solid {
+    background-color: inherit; }
   a.button.outlined,
   .woocommerce a.button.outlined {
     border: 2px solid;
@@ -435,11 +427,15 @@ iframe {
       background-color: #fff; }
 
   header {
-    padding: 20px;
     text-align: center; }
     header .align-text-left,
     header .align-text-right {
       text-align: center; }
+    header nav.float-right .menu {
+      line-height: 24px; }
+
+  #wrapper > section:first-of-type {
+    padding-top: 200px; }
 
   .billboard {
     border-radius: 0;

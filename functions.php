@@ -22,6 +22,8 @@ class Ambassador_Theme {
 
 		include_once 'includes/helpers.php';
 		include_once 'includes/post-types/sections.php';
+		include_once 'includes/post-types/templates.php';
+		include_once 'includes/extensions/woo-stripe/woo-stripe.php';
 
 	}
 
@@ -34,7 +36,7 @@ class Ambassador_Theme {
 		add_action( 'show_ambassador_breadcrumb', array( $this, 'show_breadcrumb' ) );
 
 		add_action( 'admin_menu', array( $this, 'add_branding_menu' ) );
-		add_action( 'cmb2_admin_init', array( $this, 'home_page_settings' ) );
+		add_action( 'cmb2_admin_init', array( $this, 'layout_page_settings' ) );
 		add_action( 'cmb2_admin_init', array( $this, 'brand_settings' ) );
 		add_action( 'cmb2_admin_init', array( $this, 'landing_page_settings' ) );
 
@@ -96,25 +98,53 @@ class Ambassador_Theme {
 
 	public function add_branding_menu() {
 
-		add_theme_page( 'Home', 'Home', 'manage_options', 'home-settings', array( $this, 'home_settings_page' ) );
+		add_theme_page( 'Layout', 'Layout', 'manage_options', 'layout-settings', array( $this, 'layout_settings_page' ) );
 		add_theme_page( 'Branding', 'Branding', 'manage_options', 'brand', array( $this, 'brand_settings_page' ) );
 		add_theme_page( 'Landing Page', 'Landing Page', 'manage_options', 'landing-page', array( $this, 'show_landing_page_settings' ) );
 
 	}
 
-	public function home_page_settings() {
+	public function layout_page_settings() {
 
-		$home_page_options = new_cmb2_box( array(
-			'id'      => 'home_page_options_metabox',
-			'title'   => __( 'Home Page Options', 'ambassador' ),
+		$layout_page_options = new_cmb2_box( array(
+			'id'      => 'layout_options_metabox',
+			'title'   => __( 'Layout Options', 'ambassador' ),
 			'hookup'     => false,
 			'show_on'    => array(
 				'key'   => 'options-page',
-				'value' => array( 'home-settings' )
+				'value' => array( 'layout-settings' )
 			),
 		) );
 
-		$sections_group_field_id = $home_page_options->add_field( array(
+		$layout_page_options->add_field( array(
+			'name'    => __( 'Header', 'ambassador' ),
+			'id'      => 'header_title',
+			'type'    => 'title',
+		) );
+
+		$layout_page_options->add_field( array(
+			'name'    => __( 'Header Style', 'ambassador' ),
+			'id'      => 'header_style',
+			'type'    => 'select',
+			'options' => array(
+				'centered' => 'Centered',
+				'left-sided' => 'Left Sided'
+			)
+		) );
+
+		$layout_page_options->add_field( array(
+			'name'    => __( 'Header Background Color', 'ambassador' ),
+			'id'      => 'header_background_color',
+			'type'    => 'colorpicker',
+		) );
+
+		$layout_page_options->add_field( array(
+			'name'    => __( 'Home Page Sections', 'ambassador' ),
+			'id'      => 'home_page_sections_title',
+			'type'    => 'title',
+		) );
+
+		$sections_group_field_id = $layout_page_options->add_field( array(
 			'id'          => 'sections',
 			'type'        => 'group',
 			'description' => __( 'Controls which sections display on the homepage', 'ambassador' ),
@@ -126,10 +156,16 @@ class Ambassador_Theme {
 			),
 		) );
 
-		$home_page_options->add_group_field( $sections_group_field_id, array(
+		$layout_page_options->add_group_field( $sections_group_field_id, array(
 			'name'       => __( 'Section', 'ambassador' ),
 			'id'         => 'section',
 			'type'       => 'section_select',
+		) );
+
+		$layout_page_options->add_field( array(
+			'name'    => __( 'Footer', 'ambassador' ),
+			'id'      => 'footer_title',
+			'type'    => 'title',
 		) );
 
 	}
@@ -204,6 +240,18 @@ class Ambassador_Theme {
 		) );
 
 		$branding_options->add_field( array(
+			'name'    => __( 'Footer Style', 'ambassador' ),
+			'id'      => 'footer_style',
+			'type'    => 'title',
+		) );
+
+		$branding_options->add_field( array(
+			'name'    => __( 'Contact Methods', 'ambassador' ),
+			'id'      => 'contact_methods_title',
+			'type'    => 'title',
+		) );
+
+		$branding_options->add_field( array(
 			'name'    	=> __( 'Phone Number', 'ambassador' ),
 			'id'      	=> $option_key . 'social_phone',
 			'type'    	=> 'text_medium',
@@ -234,7 +282,7 @@ class Ambassador_Theme {
 		) );
 
 		$branding_options->add_field( array(
-			'name'    	=> __( 'Address', 'ambassador' ),
+			'name'    	=> __( 'Business Address', 'ambassador' ),
 			'id'      	=> $option_key . 'social_address',
 			'type'    	=> 'textarea_small',
 		) );
@@ -301,11 +349,11 @@ class Ambassador_Theme {
 
 	}
 
-	public function home_settings_page() {
+	public function layout_settings_page() {
 		?>
-		<div class="wrap cmb2-options-page home">
+		<div class="wrap cmb2-options-page layout">
 			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-			<?php cmb2_metabox_form( 'home_page_options_metabox', 'home-settings' ); ?>
+			<?php cmb2_metabox_form( 'layout_options_metabox', 'layout-settings' ); ?>
 		</div>
 		<?php
 	}
@@ -402,6 +450,9 @@ class Ambassador_Theme {
 		return $template;
 
 	}
+
+
+
 
 }
 
